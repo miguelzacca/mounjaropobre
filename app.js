@@ -34,8 +34,34 @@ const STEPS = [
   { id: 'contact', type: 'contact', q: 'Para onde enviamos seus resultados?', sub: '🔒 100% seguro e protegido' }
 ];
 
+// ── PERSISTENCE (localStorage) ──
+const LS_KEY = 'monjaro_quiz_v1';
+
+function saveProgress() {
+  localStorage.setItem(LS_KEY, JSON.stringify({ stepIdx, data }));
+}
+
+function loadProgress() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(LS_KEY));
+    if (saved && typeof saved.stepIdx === 'number') {
+      Object.assign(data, saved.data || {});
+      return saved.stepIdx;
+    }
+  } catch {}
+  return 0;
+}
+
+function clearProgress() {
+  localStorage.removeItem(LS_KEY);
+}
+
+// ── STATE ──
 const data = {};
-let stepIdx = 0;
+let stepIdx = loadProgress();
+
+// If quiz was already finished (stepIdx >= STEPS.length), go straight to page
+const quizAlreadyDone = stepIdx >= STEPS.length;
 
 // ── BMI ──
 function calcBMI(h, w) { return w / ((h / 100) ** 2); }
@@ -60,6 +86,11 @@ function render() {
 }
 
 function buildStep(s) {
+  // Restart button (shown on all steps except intro)
+  const restartBtn = stepIdx > 0
+    ? `<button class="btn-restart" id="btn-restart" title="Recomeçar do início">↺ Recomeçar</button>`
+    : '';
+
   if (s.type === 'intro') return `
     <span class="intro-icon">⚖️</span>
     <p class="step-label">Avaliação Gratuita</p>
@@ -74,6 +105,7 @@ function buildStep(s) {
     <div class="quiz-nav"><button class="btn-next" id="btn-start">Começar Avaliação Gratuita →</button></div>`;
 
   if (s.type === 'text') return `
+    ${restartBtn}
     <p class="step-label">Sobre você</p><h2>${s.q}</h2>
     <input class="quiz-input" id="q-input" type="text" placeholder="${s.placeholder}" value="${data[s.key] || ''}">
     ${navHtml(stepIdx)}`;
@@ -81,6 +113,7 @@ function buildStep(s) {
   if (s.type === 'number') {
     const bmiHtml = s.showBMI && data.height ? buildBmiPreview() : '';
     return `
+      ${restartBtn}
       <p class="step-label">Sobre você</p><h2>${s.q}</h2>
       <div class="input-suffix">
         <input class="quiz-input" id="q-input" type="number" placeholder="${s.placeholder}" value="${data[s.key] || ''}" min="${s.min}" max="${s.max}">
@@ -91,6 +124,7 @@ function buildStep(s) {
   }
 
   if (s.type === 'radio') return `
+    ${restartBtn}
     <p class="step-label">Sobre você</p><h2>${s.q}</h2>
     <div class="options-grid">${s.opts.map(o => `
       <button class="option-btn${data[s.key] === o.v ? ' selected' : ''}" data-val="${o.v}">
@@ -99,6 +133,7 @@ function buildStep(s) {
     ${navHtml(stepIdx)}`;
 
   if (s.type === 'checkbox') return `
+    ${restartBtn}
     <p class="step-label">Sobre você</p><h2>${s.q}</h2>
     ${s.sub ? `<p class="step-sub">${s.sub}</p>` : ''}
     <div class="options-grid">${s.opts.map(o => `
@@ -108,6 +143,7 @@ function buildStep(s) {
     ${navHtml(stepIdx)}`;
 
   if (s.type === 'scale') return `
+    ${restartBtn}
     <p class="step-label">Sobre você</p><h2>${s.q}</h2>
     <div class="scale-labels"><span>${s.labelL}</span><span>${s.labelR}</span></div>
     <div class="scale-btns">${[1, 2, 3, 4, 5].map(n => `
@@ -115,6 +151,7 @@ function buildStep(s) {
     ${navHtml(stepIdx)}`;
 
   if (s.type === 'contact') return `
+    ${restartBtn}
     <p class="step-label">Quase lá!</p><h2>${s.q}</h2>
     <p class="step-sub">${s.sub}</p>
     <div class="contact-fields">
@@ -144,11 +181,18 @@ function buildBmiPreview() {
 function bindStep(s) {
   const card = document.querySelector('.quiz-card');
   const next = () => advance(s);
-  const back = () => { stepIdx--; render(); };
+  const back = () => { stepIdx--; saveProgress(); render(); };
 
-  card.querySelector('#btn-start')?.addEventListener('click', () => { stepIdx++; render(); });
+  card.querySelector('#btn-start')?.addEventListener('click', () => { stepIdx++; saveProgress(); render(); });
   card.querySelector('#btn-back')?.addEventListener('click', back);
   card.querySelector('#btn-next')?.addEventListener('click', () => next());
+
+  // Restart button
+  card.querySelector('#btn-restart')?.addEventListener('click', () => {
+    if (confirm('Tem certeza que quer recomeçar do início? Suas respostas serão apagadas.')) {
+      restartQuiz();
+    }
+  });
 
   if (s.type === 'text') {
     const inp = card.querySelector('#q-input');
@@ -172,6 +216,7 @@ function bindStep(s) {
         card.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
         data[s.key] = btn.dataset.val;
+        saveProgress();
         setTimeout(() => next(), 280);
       });
     });
@@ -203,13 +248,13 @@ function bindStep(s) {
         card.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
         data[s.key] = +btn.dataset.val;
+        saveProgress();
       });
     });
   }
 }
 
 function advance(s) {
-  // Collect values
   const card = document.querySelector('.quiz-card');
   if (s.type === 'text') {
     const v = card.querySelector('#q-input').value.trim();
@@ -231,9 +276,10 @@ function advance(s) {
   }
 
   stepIdx++;
-  // Skip conditional steps
   const next = STEPS[stepIdx];
   if (next?.skip && next.skip(data)) stepIdx++;
+
+  saveProgress();
 
   if (stepIdx >= STEPS.length) return finishQuiz();
   render();
@@ -246,7 +292,20 @@ function shake() {
   card.style.animation = 'shake .4s ease';
 }
 
+function restartQuiz() {
+  // Clear all data keys
+  Object.keys(data).forEach(k => delete data[k]);
+  stepIdx = 0;
+  clearProgress();
+  // Hide main, show quiz
+  document.getElementById('main-content').classList.remove('visible');
+  document.getElementById('quiz-overlay').classList.remove('hidden');
+  render();
+}
+
 function finishQuiz() {
+  // Mark as done (stepIdx = STEPS.length) in localStorage
+  saveProgress();
   document.getElementById('quiz-overlay').classList.add('hidden');
   const main = document.getElementById('main-content');
   main.classList.add('visible');
@@ -261,7 +320,6 @@ function populatePage() {
   const bmi = h && w ? calcBMI(h, w) : null;
   const bc = bmi ? bmiClass(bmi) : null;
 
-  // Hero
   document.getElementById('hero-name').textContent = name.split(' ')[0] + ',';
   if (bmi) {
     document.getElementById('hero-sub').textContent =
@@ -273,11 +331,10 @@ function populatePage() {
     bmiCard.querySelector('.bmi-marker').style.left = bc.bar;
     const risksWrap = bmiCard.querySelector('.bmi-risks');
     risksWrap.innerHTML = bc.risks.map(r =>
-      `<span class="bmi-risk-tag${bc.css.includes('ob') ? ` risk-high` : ''}">${r}</span>`
+      `<span class="bmi-risk-tag${bc.css.includes('ob') ? ' risk-high' : ''}">${r}</span>`
     ).join('');
   }
 
-  // Pre-fill checkout
   document.getElementById('chk-name').value = data.name || '';
   document.getElementById('chk-email').value = data.email || '';
   document.getElementById('chk-phone').value = data.phone || '';
@@ -287,8 +344,12 @@ function populatePage() {
 document.addEventListener('click', e => {
   const q = e.target.closest('.faq-q');
   if (!q) return;
-  const item = q.closest('.faq-item');
-  item.classList.toggle('open');
+  q.closest('.faq-item').classList.toggle('open');
+});
+
+// ── "Refazer quiz" button on main page ──
+document.getElementById('btn-refazer')?.addEventListener('click', () => {
+  if (confirm('Quer refazer o quiz do início?')) restartQuiz();
 });
 
 // ── CHECKOUT MODAL ──
@@ -348,14 +409,12 @@ function initFadeObserver() {
   document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 }
 
-// ── CPF MASK ──
+// ── MASKS ──
 document.getElementById('chk-cpf')?.addEventListener('input', e => {
   let v = e.target.value.replace(/\D/g, '').slice(0, 11);
   v = v.replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
   e.target.value = v;
 });
-
-// Phone mask
 document.getElementById('chk-phone')?.addEventListener('input', e => {
   let v = e.target.value.replace(/\D/g, '').slice(0, 11);
   v = v.replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{5})(\d)/, '$1-$2');
@@ -363,4 +422,12 @@ document.getElementById('chk-phone')?.addEventListener('input', e => {
 });
 
 // ── INIT ──
-render();
+if (quizAlreadyDone) {
+  // Quiz already completed — go straight to page
+  document.getElementById('quiz-overlay').classList.add('hidden');
+  document.getElementById('main-content').classList.add('visible');
+  populatePage();
+  initFadeObserver();
+} else {
+  render();
+}

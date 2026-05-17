@@ -356,6 +356,27 @@ body {
   margin-bottom: 4px
 }
 
+/* Restart button */
+.btn-restart {
+  display: block;
+  margin: 0 0 16px auto;
+  background: none;
+  border: none;
+  color: var(--text3);
+  font-size: .78rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 4px 8px;
+  border-radius: var(--r-sm);
+  transition: all .2s
+}
+
+.btn-restart:hover {
+  color: var(--red);
+  background: #FCE4EC
+}
+
 /* Nav buttons */
 .quiz-nav {
   display: flex;
@@ -420,7 +441,7 @@ body {
   padding: 16px 24px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -430,6 +451,24 @@ body {
 .header-logo {
   font-size: 1.2rem;
   font-weight: 800;
+  color: var(--blue)
+}
+
+.btn-refazer {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 6px 14px;
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--text3);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all .2s
+}
+
+.btn-refazer:hover {
+  border-color: var(--blue);
   color: var(--blue)
 }
 
