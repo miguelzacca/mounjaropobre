@@ -748,6 +748,15 @@ section {
   margin-top: 48px
 }
 
+/* Comparativo */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
 .timeline-title {
   font-size: 1.1rem;
   font-weight: 700;
@@ -1468,7 +1477,12 @@ footer .footer-links a:hover {
   .t-step::before {
     display: none
   }
+
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
 }
+
 
 /* SCROLL ANIMATIONS */
 .fade-up {
