@@ -249,6 +249,7 @@ function bindStep(s) {
         btn.classList.add('selected');
         data[s.key] = +btn.dataset.val;
         saveProgress();
+        setTimeout(() => next(), 280);
       });
     });
   }
