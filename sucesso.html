@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento Confirmado — Monjaro de Pobre</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="success-page">
+    <div class="success-card">
+
+      <!-- Estado: aguardando -->
+      <div id="state-pending">
+        <span class="success-icon">⏳</span>
+        <h1>Confirmando seu pagamento...</h1>
+        <p>Aguarde enquanto confirmamos seu pagamento. Isso pode levar alguns instantes.</p>
+        <div class="pending-msg">
+          <span class="spinner"></span> Verificando com o banco...
+        </div>
+      </div>
+
+      <!-- Estado: aprovado -->
+      <div id="state-approved" style="display:none">
+        <span class="success-icon">🎉</span>
+        <h1>Pagamento Confirmado!</h1>
+        <p>Parabéns! Sua compra foi aprovada. Clique abaixo para baixar sua receita e começar hoje mesmo.</p>
+        <a id="btn-download" href="#" class="btn-download">⬇️ Baixar Minha Receita Agora</a>
+        <p style="margin-top:16px;font-size:.8rem;color:var(--text3)">O link também foi enviado para seu e-mail.</p>
+      </div>
+
+      <!-- Estado: erro -->
+      <div id="state-error" style="display:none">
+        <span class="success-icon">❌</span>
+        <h1>Problema com o pagamento</h1>
+        <p id="error-msg">Não conseguimos confirmar seu pagamento. Se você já pagou, aguarde alguns minutos e recarregue
+          a página.</p>
+        <button onclick="location.reload()"
+          style="margin-top:16px;padding:12px 28px;background:var(--blue);color:#fff;border:none;border-radius:99px;font-size:.95rem;font-weight:700;cursor:pointer">🔄
+          Tentar novamente</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const nsu = params.get('nsu');
+    let attempts = 0;
+    const MAX = 30; // 30 × 5s = 2.5 min
+
+    async function check() {
+      if (!nsu) {
+        showError('Link inválido. Verifique seu e-mail.');
+        return;
+      }
+      try {
+        const res = await fetch('/api/status?nsu=' + encodeURIComponent(nsu));
+        const json = await res.json();
+        if (json.status === 'approved') {
+          showApproved();
+        } else if (++attempts < MAX) {
+          setTimeout(check, 5000);
+        } else {
+          showError('Tempo de confirmação esgotado. Se você pagou, aguarde alguns minutos e recarregue.');
+        }
+      } catch {
+        if (++attempts < MAX) setTimeout(check, 5000);
+        else showError('Erro de conexão. Recarregue a página.');
+      }
+    }
+
+    function showApproved() {
+      document.getElementById('state-pending').style.display = 'none';
+      document.getElementById('state-approved').style.display = 'block';
+      document.getElementById('btn-download').href = '/api/download?nsu=' + encodeURIComponent(nsu);
+    }
+
+    function showError(msg) {
+      document.getElementById('state-pending').style.display = 'none';
+      document.getElementById('state-error').style.display = 'block';
+      document.getElementById('error-msg').textContent = msg;
+    }
+
+    check();
+  </script>
+</body>
+
+</html>

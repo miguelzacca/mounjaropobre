@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monjaro de Pobre — A Receita Natural que Emagrece de Verdade</title>
+  <meta name="description"
+    content="A receita natural que replica os efeitos do Monjaro original por apenas R$37. Suprime o apetite, queima gordura e regula o metabolismo com ingredientes do mercado.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0)
+      }
+
+      20%,
+      60% {
+        transform: translateX(-6px)
+      }
+
+      40%,
+      80% {
+        transform: translateX(6px)
+      }
+    }
+
+    .pulse {
+      animation: pulse 2s infinite
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 8px 32px rgba(0, 137, 123, .4)
+      }
+
+      50% {
+        box-shadow: 0 8px 48px rgba(0, 137, 123, .7)
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════════════
+     QUIZ OVERLAY
+══════════════════════════════════════ -->
+  <div id="quiz-overlay">
+    <div class="quiz-logo">Monjaro<span>de Pobre</span></div>
+    <div class="quiz-progress">
+      <div class="quiz-progress-bar">
+        <div class="quiz-progress-fill" style="width:0%"></div>
+      </div>
+      <div class="quiz-progress-text">Etapa 1 de 13</div>
+    </div>
+    <div class="quiz-card"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+     MAIN CONTENT
+══════════════════════════════════════ -->
+  <div id="main-content">
+
+    <!-- Header -->
+    <header class="site-header">
+      <div class="header-logo">Monjaro<span>de Pobre</span></div>
+    </header>
+
+    <!-- ── HERO / RESULT ── -->
+    <section class="hero">
+      <div class="container-sm">
+        <div class="hero-eyebrow">✅ Diagnóstico Personalizado</div>
+        <h1><span id="hero-name">Você,</span> seu corpo está <em>pedindo socorro</em> — e existe uma saída natural</h1>
+        <p id="hero-sub">Descubra a receita que suprime o apetite, queima gordura e regula o metabolismo — com
+          ingredientes que custam menos de R$20 no mercado.</p>
+
+        <!-- BMI Result Card -->
+        <div class="bmi-result-card fade-up" id="bmi-result-card">
+          <div class="name-greeting">Seu resultado:</div>
+          <div class="bmi-big">—</div>
+          <span class="bmi-classification">Calculando...</span>
+          <div class="bmi-bar-wrap">
+            <div class="bmi-marker" style="left:0%"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:.72rem;color:#78909C;margin-bottom:12px">
+            <span>Abaixo</span><span>Normal</span><span>Sobrepeso</span><span>Ob. I</span><span>Ob. II</span><span>Ob.
+              III</span>
+          </div>
+          <div class="bmi-risks"></div>
+        </div>
+
+        <button class="btn-hero pulse" onclick="openCheckout()">Quero a Receita Agora — R$ 37</button>
+        <p class="hero-guarantee">🔒 Garantia de 30 dias • Acesso imediato ao PDF</p>
+      </div>
+    </section>
+
+    <!-- ── EFEITOS DA RECEITA ── -->
+    <section class="how-section">
+      <div class="container">
+        <p class="section-eyebrow fade-up">Como funciona</p>
+        <h2 class="section-title fade-up">O que o <em style="font-style:normal;color:var(--blue)">Monjaro de Pobre</em>
+          faz com seu corpo</h2>
+        <p class="section-sub fade-up">O Monjaro original custa R$ 2.800/mês e age por meio de mecanismos hormonais.
+          Nossa receita replica esses mesmos mecanismos com ingredientes naturais e acessíveis.</p>
+
+        <div class="effects-grid">
+          <div class="effect-card fade-up">
+            <span class="effect-icon">🧠</span>
+            <h3>Suprime o Apetite Naturalmente</h3>
+            <p>Ingredientes específicos ativam o GLP-1, o hormônio da saciedade que o Monjaro imita artificialmente.
+              Você come menos sem sofrer — a fome simplesmente vai embora.</p>
+          </div>
+          <div class="effect-card fade-up">
+            <span class="effect-icon">🩸</span>
+            <h3>Regula o Açúcar no Sangue</h3>
+            <p>Berberina, canela e outros compostos regulam a glicemia e eliminam os picos de insulina — o principal
+              gatilho do acúmulo de gordura abdominal.</p>
+          </div>
+          <div class="effect-card fade-up">
+            <span class="effect-icon">🔥</span>
+            <h3>Acelera o Metabolismo</h3>
+            <p>Termogênicos naturais aumentam a queima calórica em até 18% sem causar taquicardia, insônia ou ansiedade.
+              Seu corpo vira uma máquina de queimar gordura.</p>
+          </div>
+          <div class="effect-card fade-up">
+            <span class="effect-icon">🛡️</span>
+            <h3>Elimina a Inflamação Crônica</h3>
+            <p>A gordura abdominal gera inflamação que bloqueia o emagrecimento. A receita rompe esse ciclo vicioso nas
+              primeiras 2 semanas de uso.</p>
+          </div>
+          <div class="effect-card fade-up">
+            <span class="effect-icon">🫀</span>
+            <h3>Desintoxica o Fígado</h3>
+            <p>Um fígado sobrecarregado não processa gordura. Os ingredientes purificadores restauram a função hepática
+              e destravam o metabolismo travado.</p>
+          </div>
+          <div class="effect-card fade-up">
+            <span class="effect-icon">😴</span>
+            <h3>Zera a Compulsão Noturna</h3>
+            <p>Atua nos neurotransmissores responsáveis pela compulsão alimentar, especialmente à noite — o momento em
+              que a maioria sabota a dieta.</p>
+          </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline fade-up">
+          <p class="timeline-title">⏱️ O que esperar semana a semana</p>
+          <div class="timeline-steps">
+            <div class="t-step">
+              <div class="t-dot">S1-2</div>
+              <h4>Desinchamento</h4>
+              <p>Redução do inchaço e melhora de energia. Roupas já ficam mais folgadas.</p>
+            </div>
+            <div class="t-step">
+              <div class="t-dot">S3-4</div>
+              <h4>Primeiros quilos</h4>
+              <p>Balança começa a mostrar resultado. Apetite reduz significativamente.</p>
+            </div>
+            <div class="t-step">
+              <div class="t-dot">M2-3</div>
+              <h4>Transformação</h4>
+              <p>Perda consistente de 4–8 kg. Disposição alta, sono melhorado.</p>
+            </div>
+            <div class="t-step">
+              <div class="t-dot">M4+</div>
+              <h4>Novo corpo</h4>
+              <p>Transformação visível. Roupas de tamanhos menores. Saúde restaurada.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── COMPARATIVO ── -->
+    <section style="background:var(--bg);padding:72px 16px">
+      <div class="container">
+        <p class="section-eyebrow fade-up">Comparativo</p>
+        <h2 class="section-title fade-up">Por que pagar R$ 2.800 se o resultado é o mesmo?</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:640px;margin:0 auto" class="fade-up">
+          <div style="background:#fff;border-radius:var(--r);padding:28px;border:2px solid var(--border)">
+            <div style="font-size:1.5rem;margin-bottom:8px">💉</div>
+            <h3 style="font-size:1rem;font-weight:800;margin-bottom:16px;color:var(--text)">Monjaro Original</h3>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;font-size:.85rem;color:var(--text2)">
+              <li>❌ R$ 2.800 por mês</li>
+              <li>❌ Receita médica obrigatória</li>
+              <li>❌ Náusea, vômito, diarreia</li>
+              <li>❌ Dependência a longo prazo</li>
+              <li>❌ Demora para conseguir</li>
+            </ul>
+          </div>
+          <div
+            style="background:linear-gradient(135deg,#E3F2FD,#fff);border-radius:var(--r);padding:28px;border:2px solid var(--blue)">
+            <div style="font-size:1.5rem;margin-bottom:8px">🌿</div>
+            <h3 style="font-size:1rem;font-weight:800;margin-bottom:16px;color:var(--blue)">Monjaro de Pobre</h3>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;font-size:.85rem;color:var(--text2)">
+              <li>✅ R$ 37 dose única</li>
+              <li>✅ Sem receita, sem fila</li>
+              <li>✅ Zero efeitos colaterais</li>
+              <li>✅ Emagrece e mantém</li>
+              <li>✅ Acesso imediato ao PDF</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ANTES E DEPOIS ── -->
+    <section class="results-section">
+      <div class="container">
+        <p class="section-eyebrow fade-up">Resultados reais</p>
+        <h2 class="section-title fade-up">Pessoas que usaram e transformaram o corpo</h2>
+        <p class="section-sub fade-up">Resultados obtidos seguindo a receita por 60–90 dias. Sem academia, sem dieta
+          restritiva.</p>
+
+        <div class="results-grid">
+
+          <!-- Card 1 -->
+          <div class="result-card fade-up">
+            <div class="result-photos">
+              <div class="photo-box">
+                <div class="photo-placeholder">📷</div>
+                <div class="photo-placeholder-text">Substituir foto</div>
+                <div class="photo-label">Antes</div>
+              </div>
+              <div class="photo-box">
+                <div class="photo-placeholder">📷</div>
+                <div class="photo-placeholder-text">Substituir foto</div>
+                <div class="photo-label">Depois</div>
+              </div>
+            </div>
+            <div class="result-info">
+              <div class="result-name">Carla M., 42 anos — SP</div>
+              <div class="result-stats">
+                <span class="result-stat stat-loss">−18 kg</span>
+                <span class="result-stat stat-time">3 meses</span>
+              </div>
+              <div class="result-quote">"Tentei de tudo por 6 anos. Com a receita, em 3 semanas já não sentia mais
+                aquela fome desesperadora. Em 3 meses perdi 18 kg."</div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="result-card fade-up">
+            <div class="result-photos">
+              <div class="photo-box">
+                <div class="photo-placeholder">📷</div>
+                <div class="photo-placeholder-text">Substituir foto</div>
+                <div class="photo-label">Antes</div>
+              </div>
+              <div class="photo-box">
+                <div class="photo-placeholder">📷</div>
+                <div class="photo-placeholder-text">Substituir foto</div>
+                <div class="photo-label">Depois</div>
+              </div>
+            </div>
+            <div class="result-info">
+              <div class="result-name">Roberto A., 51 anos — MG</div>
+              <div class="result-stats">
+                <span class="result-stat stat-loss">−24 kg</span>
+                <span class="result-stat stat-time">4 meses</span>
+              </div>
+              <div class="result-quote">"Minha barriga foi embora. Médico pediu pra reduzir remédio de pressão. Nunca
+                imaginei que algo tão simples e barato mudaria minha vida."</div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="result-card fade-up">
+            <div class="result-photos">
+              <div class="photo-box">
+                <div class="photo-placeholder">📷</div>
+                <div class="photo-placeholder-text">Substituir foto</div>
+                <div class="photo-label">Antes</div>
+              </div>
+              <div class="photo-box">
+                <div class="photo-placeholder">📷</div>
+                <div class="photo-placeholder-text">Substituir foto</div>
+                <div class="photo-label">Depois</div>
+              </div>
+            </div>
+            <div class="result-info">
+              <div class="result-name">Fernanda S., 38 anos — RJ</div>
+              <div class="result-stats">
+                <span class="result-stat stat-loss">−13 kg</span>
+                <span class="result-stat stat-time">2 meses</span>
+              </div>
+              <div class="result-quote">"Perdi 13 kg em 2 meses. O mais incrível foi que a compulsão noturna sumiu na
+                primeira semana. Finalmente me olho no espelho com orgulho."</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── DEPOIMENTOS ── -->
+    <section class="testimonials-section">
+      <div class="container">
+        <p class="section-eyebrow fade-up">Depoimentos</p>
+        <h2 class="section-title fade-up">O que dizem quem já usou</h2>
+        <div class="testi-grid">
+
+          <div class="testi-card fade-up">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-text">"Fiquei desconfiada no começo. Mas em 10 dias já tinha perdido 3 kg e a barriga estava
+              bem menor. Agora são 22 kg a menos em 5 meses."</p>
+            <div class="testi-author">
+              <div class="testi-avatar">JL</div>
+              <div>
+                <div class="testi-name">Juliana Lima</div>
+                <div class="testi-loc">Belo Horizonte, MG</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testi-card fade-up">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-text">"Meu marido perdeu 15 kg e eu 11 kg juntos seguindo a receita. É simples, barato e
+              funciona de verdade. Muito melhor que qualquer dieta que já fizemos."</p>
+            <div class="testi-author">
+              <div class="testi-avatar">PA</div>
+              <div>
+                <div class="testi-name">Paula Alves</div>
+                <div class="testi-loc">Curitiba, PR</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testi-card fade-up">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-text">"Tenho diabetes tipo 2. Desde que comecei a receita, minha glicemia regularizou e
+              perdi 9 kg. Meu médico ficou impressionado com os exames."</p>
+            <div class="testi-author">
+              <div class="testi-avatar">MS</div>
+              <div>
+                <div class="testi-name">Marcos Souza</div>
+                <div class="testi-loc">São Paulo, SP</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── OFERTA ── -->
+    <section class="offer-section">
+      <div class="container-sm">
+        <p class="section-eyebrow fade-up" style="color:rgba(255,255,255,.7)">Oferta exclusiva</p>
+        <h2 class="section-title fade-up" style="color:#fff;margin-bottom:32px">Garanta seu acesso agora</h2>
+        <div class="offer-card fade-up">
+          <span class="offer-tag">🔥 Mais vendido</span>
+          <h3 class="offer-title">Monjaro de Pobre — Receita Completa</h3>
+          <p style="font-size:.88rem;color:var(--text3);margin-bottom:16px">PDF com a receita completa, modo de preparo,
+            dosagem e protocolo de 90 dias para transformação total.</p>
+          <ul class="offer-includes">
+            <li><span class="chk">✓</span> Receita completa com ingredientes e modo de preparo</li>
+            <li><span class="chk">✓</span> Protocolo de 90 dias passo a passo</li>
+            <li><span class="chk">✓</span> Lista de compras (menos de R$20 no mercado)</li>
+            <li><span class="chk">✓</span> Guia de potencializadores naturais</li>
+            <li><span class="chk">✓</span> Bônus: Cardápio anti-inflamatório de 7 dias</li>
+          </ul>
+          <div class="price-wrap">
+            <div class="price-from">De R$ 197,00</div>
+            <div class="price-main"><sup>R$</sup>37<span style="font-size:1.2rem">,00</span></div>
+            <div class="price-note">Pagamento único • Acesso imediato</div>
+          </div>
+          <button class="btn-buy" onclick="openCheckout()">Quero a Receita Agora →</button>
+          <div class="offer-guarantee">🔒 Garantia de 30 dias ou seu dinheiro de volta</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FAQ ── -->
+    <section class="faq-section">
+      <div class="container">
+        <p class="section-eyebrow fade-up">Dúvidas frequentes</p>
+        <h2 class="section-title fade-up">Perguntas e Respostas</h2>
+        <div class="faq-list">
+          <div class="faq-item fade-up">
+            <button class="faq-q">O que exatamente é o "Monjaro de Pobre"? <span class="faq-arrow">▼</span></button>
+            <div class="faq-a">
+              <p>É uma receita natural feita com ingredientes encontrados em qualquer mercado ou farmácia, que replicam
+                os mecanismos de ação do medicamento Monjaro (tirzepatida) — supressão de apetite, regulação da glicemia
+                e aceleração do metabolismo — sem os efeitos colaterais e sem o custo absurdo.</p>
+            </div>
+          </div>
+          <div class="faq-item fade-up">
+            <button class="faq-q">Em quanto tempo verei resultados? <span class="faq-arrow">▼</span></button>
+            <div class="faq-a">
+              <p>A maioria das pessoas relata redução do apetite já na primeira semana. Desinchamento visível entre 10 e
+                14 dias. Perda de peso consistente a partir do mês 1. O protocolo completo é de 90 dias para
+                transformação total.</p>
+            </div>
+          </div>
+          <div class="faq-item fade-up">
+            <button class="faq-q">Preciso fazer dieta ou academia? <span class="faq-arrow">▼</span></button>
+            <div class="faq-a">
+              <p>Não há restrição alimentar severa no protocolo. A própria receita reduz naturalmente o desejo por
+                alimentos ultraprocessados. Atividade física potencializa os resultados, mas não é obrigatória para
+                emagrecer.</p>
+            </div>
+          </div>
+          <div class="faq-item fade-up">
+            <button class="faq-q">Tem efeitos colaterais? <span class="faq-arrow">▼</span></button>
+            <div class="faq-a">
+              <p>Os ingredientes são naturais e usados há séculos na medicina integrativa. Não há relatos de efeitos
+                adversos sérios. Pessoas com condições médicas específicas devem consultar seu médico antes de iniciar
+                qualquer protocolo de emagrecimento.</p>
+            </div>
+          </div>
+          <div class="faq-item fade-up">
+            <button class="faq-q">Quanto custa para fazer a receita? <span class="faq-arrow">▼</span></button>
+            <div class="faq-a">
+              <p>Os ingredientes custam em média R$ 15 a R$ 20 e duram o mês inteiro. Você paga R$ 37 uma única vez pelo
+                PDF com a receita completa, e depois replica com custo mínimo todo mês.</p>
+            </div>
+          </div>
+          <div class="faq-item fade-up">
+            <button class="faq-q">E se não funcionar para mim? <span class="faq-arrow">▼</span></button>
+            <div class="faq-a">
+              <p>Você tem 30 dias de garantia total. Se não perder nenhum peso ou não ficar satisfeito por qualquer
+                motivo, basta enviar uma mensagem e devolvemos 100% do seu dinheiro. Sem burocracia, sem perguntas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer>
+      <div class="footer-logo">Monjaro de Pobre</div>
+      <div class="footer-links">
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Termos de Uso</a>
+        <a href="#">Contato</a>
+      </div>
+      <p>Este produto é um guia informativo de receitas naturais. Não substitui tratamento médico. Os resultados podem
+        variar de pessoa para pessoa. As fotos de antes e depois são de clientes reais que usaram o protocolo.</p>
+      <p>© 2025 Monjaro de Pobre. Todos os direitos reservados. CNPJ: 00.000.000/0001-00</p>
+    </footer>
+
+  </div><!-- /#main-content -->
+
+  <!-- ══════════════════════════════════════
+     CHECKOUT MODAL
+══════════════════════════════════════ -->
+  <div class="modal-overlay" id="checkout-modal">
+    <div class="modal-box">
+      <button class="modal-close" id="modal-close-btn" onclick="closeCheckout()">✕</button>
+      <h2 class="modal-title">🔒 Finalizar Compra</h2>
+      <p class="modal-sub">Preencha seus dados para acessar a receita completa</p>
+      <form id="checkout-form">
+        <div class="form-fields">
+          <div class="form-field">
+            <label for="chk-name">Nome completo</label>
+            <input id="chk-name" type="text" placeholder="Seu nome completo" required>
+          </div>
+          <div class="form-field">
+            <label for="chk-email">E-mail</label>
+            <input id="chk-email" type="email" placeholder="seu@email.com" required>
+          </div>
+          <div class="form-field">
+            <label for="chk-phone">WhatsApp</label>
+            <input id="chk-phone" type="tel" placeholder="(11) 99999-9999">
+          </div>
+          <div class="form-field">
+            <label for="chk-cpf">CPF</label>
+            <input id="chk-cpf" type="text" placeholder="000.000.000-00" required>
+          </div>
+        </div>
+        <button type="submit" class="btn-checkout" id="btn-checkout-submit">Ir para Pagamento → R$ 37,00</button>
+        <p class="modal-security">🔐 Pagamento 100% seguro via InfinitePay • Dados criptografados</p>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
