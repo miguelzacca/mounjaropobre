@@ -20,7 +20,7 @@ export default async function handler(req, res) {
   });
 
   await client.execute({
-    sql: `UPDATE monjaro_pedidos SET payment_status='approved' WHERE order_nsu=? AND payment_status!='approved'`,
+    sql: `UPDATE mounjaro_pedidos SET payment_status='approved' WHERE order_nsu=? AND payment_status!='approved'`,
     args: [orderNsu]
   });
 

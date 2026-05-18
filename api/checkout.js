@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   const client = createClient({ url, authToken });
 
   await client.execute(`
-    CREATE TABLE IF NOT EXISTS monjaro_pedidos (
+    CREATE TABLE IF NOT EXISTS mounjaro_pedidos (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       order_nsu TEXT UNIQUE NOT NULL,
       nome TEXT,
@@ -46,7 +46,7 @@ export default async function handler(req, res) {
         redirect_url: `${proto}://${host}/sucesso?nsu=${orderNsu}`,
         webhook_url: `${proto}://${host}/api/webhook`,
         order_nsu: orderNsu,
-        items: [{ quantity: 1, price: 3700, description: 'Monjaro de Pobre — Receita Secreta' }],
+        items: [{ quantity: 1, price: 3700, description: 'Mounjaro de Pobre — Receita Secreta' }],
         customer: {
           name: name || 'Cliente',
           email,
@@ -65,10 +65,10 @@ export default async function handler(req, res) {
     if (!ipData.url) return res.status(400).json({ error: 'URL de pagamento inválida' });
 
     await client.execute({
-      sql: `INSERT INTO monjaro_pedidos (order_nsu, nome, email, telefone, cpf, imc, imc_classe, quiz_data)
+      sql: `INSERT INTO mounjaro_pedidos (order_nsu, nome, email, telefone, cpf, imc, imc_classe, quiz_data)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
       args: [orderNsu, name || null, email, phone || null, cpf || null,
-             imc || null, imcClass || null, JSON.stringify(quizData || {})]
+        imc || null, imcClass || null, JSON.stringify(quizData || {})]
     });
 
     return res.status(201).json({ success: true, paymentUrl: ipData.url, orderNsu });

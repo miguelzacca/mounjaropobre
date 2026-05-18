@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   });
 
   const result = await client.execute({
-    sql: 'SELECT payment_status FROM monjaro_pedidos WHERE order_nsu=?',
+    sql: 'SELECT payment_status FROM mounjaro_pedidos WHERE order_nsu=?',
     args: [nsu]
   });
 

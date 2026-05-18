@@ -35,7 +35,7 @@ const STEPS = [
 ];
 
 // ── PERSISTENCE (localStorage) ──
-const LS_KEY = 'monjaro_quiz_v1';
+const LS_KEY = 'mounjaro_quiz_v1';
 
 function saveProgress() {
   localStorage.setItem(LS_KEY, JSON.stringify({ stepIdx, data }));
@@ -48,7 +48,7 @@ function loadProgress() {
       Object.assign(data, saved.data || {});
       return saved.stepIdx;
     }
-  } catch {}
+  } catch { }
   return 0;
 }
 
@@ -99,7 +99,7 @@ function buildStep(s) {
     <ul class="intro-bullets">
       <li><span class="ic">🧮</span> Cálculo do seu IMC e nível de risco</li>
       <li><span class="ic">🔍</span> Identificação dos seus bloqueios</li>
-      <li><span class="ic">💊</span> Receita natural que replica o Monjaro</li>
+      <li><span class="ic">💊</span> Receita natural que replica o Mounjaro</li>
       <li><span class="ic">⚡</span> Resultados em até 14 dias</li>
     </ul>
     <div class="quiz-nav"><button class="btn-next" id="btn-start">Começar Avaliação Gratuita →</button></div>`;
